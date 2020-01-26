@@ -48,6 +48,6 @@ public class User {
     }
     @Override
     public String toString(){
-        return "{ ID = " + userId + "First name" + firstname + "Last name" + lastname + "Email id" + emailId + "}";
+        return "{ ID = " + userId + " First name = " + firstname + " Last name = " + lastname + " Email id = " + emailId + "}";
     }
 }
