@@ -1,4 +1,4 @@
-package co.hackerscode.userservice.userservice.models;
+package co.hackerscode.userservice.models;
 
 public class User {
     private String firstname = null;

@@ -1,8 +1,8 @@
-package co.hackerscode.userservice.userservice.controllers;
+package co.hackerscode.userservice.controllers;
 
-import co.hackerscode.userservice.userservice.dao.UserDaoImpl;
-import co.hackerscode.userservice.userservice.models.User;
-import co.hackerscode.userservice.userservice.utils.CommonConstants;
+import co.hackerscode.userservice.dao.UserDaoImpl;
+import co.hackerscode.userservice.models.User;
+import co.hackerscode.userservice.utils.CommonConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package co.hackerscode.userservice.userservice;
+package co.hackerscode.userservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

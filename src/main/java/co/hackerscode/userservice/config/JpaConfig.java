@@ -1,4 +1,4 @@
-package co.hackerscode.userservice.userservice.config;
+package co.hackerscode.userservice.config;
 
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;

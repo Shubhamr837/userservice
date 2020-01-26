@@ -1,6 +1,6 @@
-package co.hackerscode.userservice.userservice.dao;
+package co.hackerscode.userservice.dao;
 
-import co.hackerscode.userservice.userservice.models.User;
+import co.hackerscode.userservice.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

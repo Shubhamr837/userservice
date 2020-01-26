@@ -1,4 +1,4 @@
-package co.hackerscode.userservice.userservice.utils;
+package co.hackerscode.userservice.utils;
 
 public class CommonConstants {
     public static final String EMAIL_ID = "emailId";
