@@ -9,13 +9,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import static co.hackerscode.userservice.dao.UserDaoConstants.*;
 
 @Configuration
 public class JpaConfig {
 
     private Connection con = null;
     private PreparedStatement ps = null;
-    private String createtablequery = "create table if not exists Users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL , password VARCHAR(100) NOT NULL , emailid VARCHAR(100) NOT NULL);";
+    private String createtablequery = "create table if not exists Users( "
+    + COLUMN_ID +
+    " INT NOT NULL AUTO_INCREMENT PRIMARY KEY , "
+    +COLUMN_FIRSTNAME+" VARCHAR(100) NOT NULL, "
+    +COLUMN_LASTNAME + " VARCHAR(100) NOT NULL , "
+    + COLUMN_PASSWORD+" VARCHAR(100) NOT NULL , "
+    + COLUMN_EMAILID + " VARCHAR(100) NOT NULL);";
     @Bean
     public DataSource getDataSource() throws SQLException {
 

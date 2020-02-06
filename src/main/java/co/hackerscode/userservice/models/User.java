@@ -3,7 +3,7 @@ package co.hackerscode.userservice.models;
 public class User {
     private String firstname = null;
     private String lastname = null;
-    private String emailId = null;
+    private String emailid = null;
     private String password = null;
     private int userId = 0;
 
@@ -32,11 +32,11 @@ public class User {
     }
 
     public String getEmailId() {
-        return emailId;
+        return emailid;
     }
 
     public void setEmailId(String emailId) {
-        this.emailId = emailId;
+        this.emailid = emailId;
     }
 
     public String getPassword() {
@@ -48,6 +48,6 @@ public class User {
     }
     @Override
     public String toString(){
-        return "{ ID = " + userId + " First name = " + firstname + " Last name = " + lastname + " Email id = " + emailId + "}";
+        return "{ ID = " + userId + " First name = " + firstname + " Last name = " + lastname + " Email id = " + emailid + "}";
     }
 }
