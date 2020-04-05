@@ -1,6 +1,6 @@
 # userservice
 
-this repository can be forked and run in intellij .
+this repository can be forked and run in intellij. Mysql server address witth username password needs to be configured in package co.hackerscode.userservice.config jpaConfig class .
 
 following are the api endpoints .
 
