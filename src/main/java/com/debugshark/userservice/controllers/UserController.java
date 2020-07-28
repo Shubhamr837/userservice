@@ -1,15 +1,13 @@
-package co.hackerscode.userservice.controllers;
+package com.debugshark.userservice.controllers;
 
-import co.hackerscode.userservice.dao.UserDaoImpl;
-import co.hackerscode.userservice.models.User;
-import co.hackerscode.userservice.utils.CommonConstants;
+import com.debugshark.userservice.dao.UserDao;
+import com.debugshark.userservice.dao.UserDaoImpl;
+import com.debugshark.userservice.models.User;
+import com.debugshark.userservice.utils.CommonConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
 
 @RestController
@@ -145,5 +143,48 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/addSolved",method = RequestMethod.POST , consumes = "application/json", produces = "application/json")
+    public ResponseEntity addSolved(@RequestBody String jsonString){
+
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        int userId= jsonObject.getInt("id");
+        int questionId = jsonObject.getInt("questionId");
+        if(userDao.addSolved(userId,questionId))
+        {
+            JSONObject jsonObjectResponse = new JSONObject();
+            jsonObjectResponse.put("status",HttpStatus.OK);
+            jsonObjectResponse.put("added-solved",jsonObject);
+
+            return ResponseEntity.ok().body(jsonObjectResponse.toString());
+
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
+
+    @RequestMapping(value = "/getSolved",method = RequestMethod.GET , consumes = "application/json", produces = "application/json")
+    public ResponseEntity getSolved(@RequestParam int page,@RequestBody String jsonString){
+
+        JSONObject jsonObject = new JSONObject(jsonString);
+        int userId = jsonObject.getInt("id");
+        JSONObject jsonObjectResponse = null;
+
+        jsonObjectResponse = userDao.getSolved(userId,page);
+        if(jsonObjectResponse!=null)
+        {
+
+            jsonObjectResponse.put("status",HttpStatus.FOUND);
+
+            return ResponseEntity.ok().body(jsonObjectResponse.toString());
+
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+    }
 
 }

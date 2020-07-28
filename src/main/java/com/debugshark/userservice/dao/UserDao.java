@@ -1,6 +1,6 @@
-package co.hackerscode.userservice.dao;
+package com.debugshark.userservice.dao;
 
-import co.hackerscode.userservice.models.User;
+import com.debugshark.userservice.models.User;
 
 import java.util.List;
 

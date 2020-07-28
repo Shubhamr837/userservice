@@ -1,17 +1,16 @@
-package co.hackerscode.userservice.dao;
+package com.debugshark.userservice.dao;
 
-import co.hackerscode.userservice.models.User;
+import com.debugshark.userservice.models.User;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import static com.debugshark.userservice.dao.UserDaoConstants.*;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import co.hackerscode.userservice.dao.UserDaoConstants;
+
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -24,22 +23,23 @@ public class UserDaoImpl implements UserDao {
         String query = "insert into Users ( firstname, lastname , emailid , password ) values (?,?,?,?)";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
-            ps.setString(1 , user.getFirstname());
+            ps.setString(1, user.getFirstname());
             ps.setString(2, user.getLastname());
             ps.setString(3, user.getEmailId());
-            ps.setString(4 , user.getPassword());
+            ps.setString(4, user.getPassword());
             int out = ps.executeUpdate();
-            if(out !=0){
+            if (out != 0) {
                 System.out.println("User saved with emailId" + user.getEmailId());
-            }else {System.out.println("User save failed with emailid="+ user.getEmailId());
-            return false;
+            } else {
+                System.out.println("User save failed with emailid=" + user.getEmailId());
+                return false;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -57,25 +57,25 @@ public class UserDaoImpl implements UserDao {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, EmailId);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 user = new User();
                 user.setUserId(rs.getInt("id"));
                 user.setFirstname(rs.getString("firstname"));
                 user.setLastname(rs.getString("lastname"));
                 user.setEmailId(EmailId);
                 user.setPassword(rs.getString("password"));
-                System.out.println("User Found::"+ user);
-            }else{
-                System.out.println("No User found with emailId="+EmailId);
+                System.out.println("User Found::" + user);
+            } else {
+                System.out.println("No User found with emailId=" + EmailId);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 rs.close();
                 ps.close();
@@ -93,20 +93,20 @@ public class UserDaoImpl implements UserDao {
         String query = "update Users set firstname=?, lastname=? where id=?";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, user.getFirstname());
             ps.setString(2, user.getLastname());
             ps.setInt(3, user.getUserId());
             int out = ps.executeUpdate();
-            if(out !=0){
+            if (out != 0) {
                 System.out.println("User updated with emailid=" + user.getEmailId());
-            }else System.out.println("No User found with emailid=" + user.getEmailId());
-        }catch(SQLException e){
+            } else System.out.println("No User found with emailid=" + user.getEmailId());
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -123,18 +123,20 @@ public class UserDaoImpl implements UserDao {
         String query = "delete from Users where id=?";
         Connection con = null;
         PreparedStatement ps = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             int out = ps.executeUpdate();
-            if(out !=0){
-                System.out.println("user deleted with id="+id);
-            }else {System.out.println("No user found with id="+id);
-            return false;}
-        }catch(SQLException e){
+            if (out != 0) {
+                System.out.println("user deleted with id=" + id);
+            } else {
+                System.out.println("No user found with id=" + id);
+                return false;
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -153,11 +155,11 @@ public class UserDaoImpl implements UserDao {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("id"));
                 user.setFirstname(rs.getString("firstname"));
@@ -165,9 +167,9 @@ public class UserDaoImpl implements UserDao {
                 user.setEmailId(rs.getString("emailid"));
                 userArrayList.add(user);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 rs.close();
                 ps.close();
@@ -185,22 +187,22 @@ public class UserDaoImpl implements UserDao {
         Connection con = null;
         PreparedStatement ps = null;
         boolean result = false;
-        try{
+        try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(query);
             ps.setString(1, password);
             ps.setInt(2, id);
             int out = ps.executeUpdate();
-            if(out !=0){
+            if (out != 0) {
                 System.out.println("User updated with id=" + id);
                 result = true;
-            }else {
-            System.out.println("No User found with id=" + id);
-            result = false;
+            } else {
+                System.out.println("No User found with id=" + id);
+                result = false;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 ps.close();
                 con.close();
@@ -209,6 +211,79 @@ public class UserDaoImpl implements UserDao {
             }
         }
         return result;
+    }
+
+    public boolean addSolved(int id, int questionId) {
+        String query = "insert into Solved (" + COLUMN_ID + "," + COLUMN_QUESTION_ID + " ) values (?,?);";
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean result = false;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.setInt(2, questionId);
+            int out = ps.executeUpdate();
+            if (out != 0) {
+                System.out.println("Record updated with id=" + id);
+                result = true;
+            } else {
+                System.out.println("failed to insert with user id=" + id + "and question id" + questionId);
+                result = false;
+            }
+        }catch (SQLIntegrityConstraintViolationException e)
+        {
+            System.out.println("record may already exists");
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public JSONObject getSolved(int id,int page) {
+        String query = "select " + COLUMN_QUESTION_ID + " from Solved where " + COLUMN_ID + "= ? limit ? offset ?;";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        JSONObject jsonObject = null;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.setInt(2,10);
+            ps.setInt(3,page*10);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                List<Integer> list = new ArrayList<Integer>();
+                do {
+                 list.add(rs.getInt(COLUMN_QUESTION_ID));
+                } while (rs.next());
+                jsonObject = new JSONObject();
+                jsonObject.put(Integer.toString(id),list);
+            } else {
+                System.out.println("No Solved found with UserId=" + id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return jsonObject;
     }
 }
 

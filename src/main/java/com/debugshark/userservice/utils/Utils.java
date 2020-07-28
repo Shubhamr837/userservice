@@ -1,4 +1,4 @@
-package co.hackerscode.userservice.utils;
+package com.debugshark.userservice.utils;
 
 import org.json.JSONObject;
 
