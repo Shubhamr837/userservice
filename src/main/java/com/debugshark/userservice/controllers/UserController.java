@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
 
-@RestController
+@RestController(value="user")
 public class UserController {
 @Autowired
    private UserDaoImpl userDao;
